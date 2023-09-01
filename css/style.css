@@ -7,12 +7,50 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+  background-image: linear-gradient(to right top, #f3eed9, #ebe0cd, #e3d1c2, #dac3b8, #cfb6af, #ceafab, #cda9a9, #caa2a8, #d1a0ae, #d59fb6, #d79ec1, #d69ece);
+}
+
 /******************************************
 /* LAYOUT
 /*******************************************/
 
+form {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: .5rem;
+}
 
+.formContainer {
+  background-color: #FFE4E1;
+  width: max-content;
+  padding: 2rem 3rem;
+  margin: auto;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 9px black
+}
 
+form > div {
+  display: flex;
+  flex-direction: column;
+}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+input[type="checkbox"] {
+  align-self: flex-start;
+}
+
+form button {
+  background-color: #EE7B7B;
+  border: 2px solid black;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+form button svg {
+  height: 2rem;
+}
