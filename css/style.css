@@ -112,3 +112,7 @@ form button svg {
 .bookCard:hover {
   border-left: 8px solid #EE7B7B;
 }
+
+details {
+  padding-bottom: 1rem;
+}
