@@ -19,23 +19,23 @@
 		
 		<div class="main-container">
 			<div class="formContainer">
-				<form action="#" method="get">
+				<form id="form" action="#" method="get">
 					<h2>Add a Book</h2>
 					<div>
 						<label for="title">Book Title:</label>
-						<input type="text" name="bookTitle" id="title" >
+						<input type="text" name="bookTitle" id="title" required>
 					</div>
 					<div>
 						<label for="author">Book Author:</label>
-						<input type="text" name="bookAuthor" id="author">	
+						<input type="text" name="bookAuthor" id="author" required>	
 					</div>
 					<div>
 						<label for="pages">Number of Pages:</label>
-						<input type="number" name="bookPages" id="pages">
+						<input type="number" name="bookPages" id="pages" required>
 					</div>
 					<div>
 						<label for="summary">Summary:</label>
-						<textarea name="bookSummary" id="summary" cols="30" rows="5" placeholder="Once upon a time..."></textarea>
+						<textarea name="bookSummary" id="summary" cols="30" rows="5" placeholder="Once upon a time..." required></textarea>
 					</div>
 					<div>
 						<label for="status">Read?</label>
