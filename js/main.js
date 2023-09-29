@@ -1,38 +1,21 @@
-const harryPotterPoA = new Book(
-  'Harry Potter and the Prisoner of Azkaban', 
-  'J.K. Rowling', 
-  317, 
-  `Harry Potter's (Daniel Radcliffe) third year at Hogwarts starts off badly when he learns deranged killer Sirius Black (Gary Oldman) has escaped from Azkaban prison and is bent on murdering the teenage wizard. While Hermione's (Emma Watson) cat torments Ron's (Rupert Grint) sickly rat, causing a rift among the trio, a swarm of nasty Dementors is sent to protect the school from Black. A mysterious new teacher helps Harry learn to defend himself, but what is his secret tie to Sirius Black?`,
-  'yes')
-
-const feastForCrows = new Book(
-  'A Feast for Crows', 
-  'George R.R. Martin', 
-  753, 
-  `A Feast for Crows focuses on the Lannister family's continuing consolidation of power following victory in the “War of the Five Kings.” Specifically, it follows the events precipitated by the murder of Tywin Lannister, who had been de facto ruler of Westeros. In his place, his daughter Cersei, seizes power.`,
-  'no')
-
 const form = document.getElementById('form')
 
-const myLibrary= [harryPotterPoA, feastForCrows];
-
-displayBook(myLibrary);
-
-
-function Book (title, author, pages, summary, read) {
-  this.bookTitle = title;
-  this.bookAuthor = author;
-  this.bookPages = pages;
-  this.bookSummary = summary;
-  this.read = read;
-  this.info = function() {
+class Book {
+  constructor (title, author, pages, summary, read) {
+    this.bookTitle = title;
+    this.bookAuthor = author;
+    this.bookPages = pages;
+    this.bookSummary = summary;
+    this.readStatus = read;
+  }
+  
+  info() {
     let sentence = ''
-    if (read == 'yes') {
-      sentence = `${title},by ${author} has ${pages} pages and I have read it.`
+    if (this.readStatus == 'yes') {
+      sentence = `${this.bookTitle},by ${this.bookAuthor} has ${this.bookPages} pages and I have read it.`
     } else {
-      sentence = sentence = `${title},by ${author} has ${pages} pages and I have not read it.`
+      sentence = `${this.bookTitle},by ${this.bookAuthor} has ${this.bookPages} pages and I have not read it.`
     }
-    console.log(sentence);
     return sentence
   }
 }
@@ -56,7 +39,6 @@ function addBookToLibrary (item) {
   
   const details = document.createElement('details')
   
-  
   const newSummary = document.createElement('summary')
   newSummary.textContent = 'Summary: '
 
@@ -66,10 +48,10 @@ function addBookToLibrary (item) {
 
   
   const readBtn = document.createElement('button')
-  if (item.read == 'yes'){
+  if (item.readStatus == 'yes'){
     readBtn.classList.add('read')
     readBtn.textContent = 'Book read!'
-  } else if(item.read == 'no'){
+  } else if(item.readStatus == 'no'){
     readBtn.textContent = 'Book is yet to read!'
   }
   
@@ -88,28 +70,28 @@ function addBookToLibrary (item) {
   newBook.appendChild(deleteBtn)
 
   readBtn.addEventListener("click", () => {
-    if (item.read === 'yes') {
+    if (item.readStatus === 'yes') {
       readBtn.classList.remove('read')
       readBtn.textContent = 'Book is yet to read!'
-      item.read = 'no'
-    } else if (item.read === 'no') {
+      item.readStatus = 'no'
+    } else if (item.readStatus === 'no') {
       readBtn.classList.add('read')
       readBtn.textContent = 'Book read!'
-      item.read = 'yes'
+      item.readStatus = 'yes'
     }
   })
 
-  deleteBtn.addEventListener("click", () => {
-    myLibrary.splice(item, 1)
+  deleteBtn.addEventListener("click", () => { 
+    myLibrary.splice(myLibrary.indexOf(item), 1)
     bookShelf.removeChild(newBook)
   })
 
 }
 
 
-function displayBook(array) {
-  array.forEach(element => {
-    addBookToLibrary(element)
+function displayBook(myLibrary) {
+  myLibrary.forEach(book => {
+    addBookToLibrary(book)
   });
 }
 
@@ -126,9 +108,26 @@ form.addEventListener("submit", (e) => {
   } else {
     read = 'no'
   }
-  console.log(status.checked)
   const bookAdd = new Book(title.value, author.value, pages.value, summary.value, read);
   myLibrary.push(bookAdd);
   addBookToLibrary(bookAdd);
   form.reset()
 });
+
+const harryPotterPoA = new Book(
+  'Harry Potter and the Prisoner of Azkaban', 
+  'J.K. Rowling', 
+  317, 
+  `Harry Potter's (Daniel Radcliffe) third year at Hogwarts starts off badly when he learns deranged killer Sirius Black (Gary Oldman) has escaped from Azkaban prison and is bent on murdering the teenage wizard. While Hermione's (Emma Watson) cat torments Ron's (Rupert Grint) sickly rat, causing a rift among the trio, a swarm of nasty Dementors is sent to protect the school from Black. A mysterious new teacher helps Harry learn to defend himself, but what is his secret tie to Sirius Black?`,
+  'yes')
+
+const feastForCrows = new Book(
+  'A Feast for Crows', 
+  'George R.R. Martin', 
+  753, 
+  `A Feast for Crows focuses on the Lannister family's continuing consolidation of power following victory in the “War of the Five Kings.” Specifically, it follows the events precipitated by the murder of Tywin Lannister, who had been de facto ruler of Westeros. In his place, his daughter Cersei, seizes power.`,
+  'no')
+
+  const myLibrary= [harryPotterPoA, feastForCrows];
+
+  displayBook(myLibrary);
